@@ -1,0 +1,21 @@
+{
+  "env": {
+    "browser": true,
+    "es2020": true,
+    "cypress/globals": true,
+    "jest/globals": true
+  },
+  "extends": ["plugin:react/recommended", "airbnb"],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 11,
+    "sourceType": "module"
+  },
+  "plugins": ["react", "prettier", "jest", "cypress"],
+  "rules": {
+    "prettier/prettier": ["off", {}, {"usePrettierrc": true}],
+    "indent": "off"
+  }
+}
