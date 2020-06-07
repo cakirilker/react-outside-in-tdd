@@ -15,9 +15,10 @@
   },
   "plugins": ["react", "prettier", "jest", "cypress"],
   "rules": {
-    "prettier/prettier": ["warn", {}, {"usePrettierrc": true}],
+    "prettier/prettier": ["warn", {}, { "usePrettierrc": true }],
     "indent": "off",
     "no-tabs": "warn",
-    "no-mixed-spaces-and-tabs": "warn"
+    "no-mixed-spaces-and-tabs": "warn",
+    "react/prop-types": "off"
   }
 }
