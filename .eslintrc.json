@@ -19,6 +19,7 @@
     "indent": "off",
     "no-tabs": "warn",
     "no-mixed-spaces-and-tabs": "warn",
-    "react/prop-types": "off"
+    "react/prop-types": "off",
+    "arrow-parens":"off"
   }
 }
