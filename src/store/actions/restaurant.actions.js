@@ -1,11 +1,17 @@
-import { GET_RESTAURANTS } from '../../constants';
+import { STORE_RESTAURANTS, SET_LOADING } from '../../constants';
 
 const getRestaurantsAction = payload => ({
-  type: GET_RESTAURANTS,
+  type: STORE_RESTAURANTS,
+  payload,
+});
+
+export const setLoadingAction = payload => ({
+  type: SET_LOADING,
   payload,
 });
 
 export const loadRestaurants = () => (dispatch, getState, api) => {
+  dispatch(setLoadingAction(true));
   api
     .loadRestaurants()
     .then(records => dispatch(getRestaurantsAction(records)));
