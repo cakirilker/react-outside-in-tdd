@@ -2,12 +2,13 @@ import React from 'react';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import { RestaurantList } from '.';
+import { RestaurantList, RestaurantForm } from '../components';
 
 const Restaurants = () => (
   <Card>
     <CardContent>
       <Typography variant="h5">Restaurants</Typography>
+      <RestaurantForm />
       <RestaurantList />
     </CardContent>
   </Card>

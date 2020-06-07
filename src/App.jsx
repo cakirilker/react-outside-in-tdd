@@ -9,7 +9,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import store from './store';
-import { Restaurants } from './components';
+import { Restaurants } from './containers';
 
 const theme = createMuiTheme({
   palette: { primary: green },
