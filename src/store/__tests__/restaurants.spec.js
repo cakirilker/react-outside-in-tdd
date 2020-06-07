@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { RestaurantReducer } from '../reducers';
-import { loadRestaurants } from '../actions';
+import { loadRestaurants, createRestaurant } from '../actions';
 
 describe('restaurants reducer', () => {
   describe('initial', () => {
@@ -88,6 +88,51 @@ describe('restaurants reducer', () => {
       it('should clear loading flag', () => {
         expect(store.getState().loading).toEqual(false);
       });
+    });
+  });
+
+  describe('createRestaurant action', () => {
+    const newRestaurantName = 'Sushi Place';
+    const existingRestaurants = [{ id: 1, name: 'Pizza Place' }];
+    const responseRestaurant = { id: 2, name: newRestaurantName };
+    let api;
+    let store;
+    let promise;
+
+    beforeEach(() => {
+      api = {
+        createRestaurant: jest.fn().mockName('createRestaurant'),
+      };
+      const initialState = {
+        records: existingRestaurants,
+      };
+      store = createStore(
+        RestaurantReducer,
+        initialState,
+        applyMiddleware(thunk.withExtraArgument(api)),
+      );
+    });
+
+    it('should save the restaurant to the server', () => {
+      api.createRestaurant.mockResolvedValue(responseRestaurant);
+      store.dispatch(createRestaurant(newRestaurantName));
+      expect(api.createRestaurant).toHaveBeenCalledWith(newRestaurantName);
+    });
+
+    describe('when save succeeds', () => {
+      beforeEach(() => {
+        api.createRestaurant.mockResolvedValue(responseRestaurant);
+        promise = store.dispatch(createRestaurant(newRestaurantName));
+      });
+
+      it('should store returned restaurant into store', () => {
+        expect(store.getState().records).toEqual([
+          ...existingRestaurants,
+          responseRestaurant,
+        ]);
+      });
+
+      it('should resolve promise', () => expect(promise).resolves.toBeUndefined());
     });
   });
 });
