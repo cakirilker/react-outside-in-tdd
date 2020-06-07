@@ -1,10 +1,13 @@
 import React from 'react';
+import { Provider } from 'react-redux';
 import { Restaurants } from './components';
+import store from './store';
 
 const App = () => (
   <div>
-    Hello World.
-    <Restaurants />
+    <Provider store={store}>
+      <Restaurants />
+    </Provider>
   </div>
 );
 
