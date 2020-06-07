@@ -45,38 +45,3 @@ export default combineReducers({
   loading,
   error,
 });
-
-// import { STORE_RESTAURANTS, SET_LOADING, SET_ERROR } from '../../constants';
-
-// let initialState = {
-//   records: [],
-//   loading: false,
-//   error: false,
-// };
-
-// const state = (state = initialState, { type, payload }) => {
-//   switch (type) {
-//     case STORE_RESTAURANTS:
-//       return {
-//         ...state,
-//         records: payload,
-//         loading: false,
-//       };
-//     case SET_LOADING:
-//       return {
-//         ...state,
-//         loading: true,
-//         error: false,
-//       };
-//     case SET_ERROR:
-//       return {
-//         ...state,
-//         loading: false,
-//         error: true,
-//       };
-//     default:
-//       return initialState;
-//   }
-// };
-
-// export default state;
