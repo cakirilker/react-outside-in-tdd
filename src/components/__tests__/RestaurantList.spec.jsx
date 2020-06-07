@@ -17,6 +17,7 @@ describe('RestaurantList', () => {
         loadRestaurants={loadRestaurants}
         restaurants={restaurants}
         loading={false}
+        error={false}
         {...props}
       />,
     );
@@ -48,5 +49,16 @@ describe('RestaurantList', () => {
       expect(queryByText('Sushi Place')).not.toBeNull();
       expect(queryByText('Pizza Place')).not.toBeNull();
     });
+
+    it('should not display the error message', () => {
+      const { queryByText } = context;
+      expect(queryByText('Restaurants could not be loaded.')).toBeNull();
+    });
+  });
+
+  describe('when fetching restaurants fails', () => {
+    renderWithProps({ error: true });
+    const { queryByText } = context;
+    expect(queryByText('Restaurants could not be loaded.')).not.toBeNull();
   });
 });

@@ -1,4 +1,4 @@
-import { STORE_RESTAURANTS, SET_LOADING } from '../../constants';
+import { STORE_RESTAURANTS, SET_LOADING, SET_ERROR } from '../../constants';
 
 const getRestaurantsAction = payload => ({
   type: STORE_RESTAURANTS,
@@ -10,9 +10,17 @@ export const setLoadingAction = payload => ({
   payload,
 });
 
+export const setErrorAction = payload => ({
+  type: SET_ERROR,
+  payload,
+});
+
 export const loadRestaurants = () => (dispatch, getState, api) => {
   dispatch(setLoadingAction(true));
   api
     .loadRestaurants()
-    .then(records => dispatch(getRestaurantsAction(records)));
+    .then(records => dispatch(getRestaurantsAction(records)))
+    .catch(() => {
+      dispatch(setErrorAction(true));
+    });
 };

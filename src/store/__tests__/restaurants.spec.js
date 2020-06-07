@@ -5,14 +5,20 @@ import { loadRestaurants } from '../actions';
 
 describe('restaurants reducer', () => {
   describe('initial', () => {
+    let store;
+    beforeEach(() => {
+      store = createStore(RestaurantReducer, applyMiddleware(thunk));
+    });
     it('should not have loading flag true', () => {
-      const store = createStore(RestaurantReducer, applyMiddleware(thunk));
       expect(store.getState().loading).toEqual(false);
+    });
+    it('shuld not have error flag true', () => {
+      expect(store.getState().error).toEqual(false);
     });
   });
 
   describe('loadRestaurants action', () => {
-    describe('when loading ends', () => {
+    describe('when fetching succeeds', () => {
       const records = [
         { id: 1, name: 'Sushi Place' },
         { id: 2, name: 'Pizza Place' },
@@ -41,16 +47,46 @@ describe('restaurants reducer', () => {
     });
 
     describe('while loading', () => {
-      it('should set a loading flag', () => {
+      let store;
+      beforeEach(() => {
         const api = {
           loadRestaurants: () => new Promise(() => {}),
         };
-        const store = createStore(
+        const initialState = { error: true };
+        store = createStore(
+          RestaurantReducer,
+          initialState,
+          applyMiddleware(thunk.withExtraArgument(api)),
+        );
+        store.dispatch(loadRestaurants());
+      });
+      it('should set a loading flag', () => {
+        expect(store.getState().loading).toEqual(true);
+      });
+      it('should clear the error flag', () => {
+        expect(store.getState().error).toEqual(false);
+      });
+    });
+
+    describe('when fetching fails', () => {
+      let store;
+      beforeEach(() => {
+        const api = {
+          loadRestaurants: () => Promise.reject(),
+        };
+        store = createStore(
           RestaurantReducer,
           applyMiddleware(thunk.withExtraArgument(api)),
         );
         store.dispatch(loadRestaurants());
-        expect(store.getState().loading).toEqual(true);
+      });
+
+      it('should set an error flag', () => {
+        expect(store.getState().error).toEqual(true);
+      });
+
+      it('should clear loading flag', () => {
+        expect(store.getState().loading).toEqual(false);
       });
     });
   });

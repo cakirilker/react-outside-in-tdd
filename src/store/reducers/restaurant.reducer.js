@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { STORE_RESTAURANTS, SET_LOADING } from '../../constants';
+import { STORE_RESTAURANTS, SET_LOADING, SET_ERROR } from '../../constants';
 
 const records = (state = [], { type, payload }) => {
   switch (type) {
@@ -13,6 +13,7 @@ const records = (state = [], { type, payload }) => {
 const loading = (state = false, { type, payload }) => {
   switch (type) {
     case STORE_RESTAURANTS:
+    case SET_ERROR:
       return false;
     case SET_LOADING:
       return payload;
@@ -21,7 +22,19 @@ const loading = (state = false, { type, payload }) => {
   }
 };
 
+const error = (state = false, { type, payload }) => {
+  switch (type) {
+    case SET_ERROR:
+      return payload;
+    case SET_LOADING:
+      return false;
+    default:
+      return state;
+  }
+};
+
 export default combineReducers({
   records,
   loading,
+  error,
 });
