@@ -12,7 +12,7 @@ describe('restaurants reducer', () => {
     it('should not have loading flag true', () => {
       expect(store.getState().loading).toEqual(false);
     });
-    it('shuld not have error flag true', () => {
+    it('should not have error flag true', () => {
       expect(store.getState().error).toEqual(false);
     });
   });

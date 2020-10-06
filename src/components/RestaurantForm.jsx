@@ -11,15 +11,15 @@ export const RestaurantForm = ({ createRestaurant }) => {
   const handleSubmit = e => {
     e.preventDefault();
     if (!name) {
-      return setValidationError(true);
+      return setValidationError('Name is required');
     }
-    setValidationError(false);
+    setValidationError(null);
     return createRestaurant(name).then(() => setName(''));
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      {validationError && <Alert severity="error">Name is required</Alert>}
+      {validationError && <Alert severity="error">{validationError}</Alert>}
       <TextField
         placeholder="Restaurant Name"
         fullWidth

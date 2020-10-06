@@ -1,4 +1,3 @@
-import { combineReducers } from 'redux';
 import {
   STORE_RESTAURANTS,
   SET_LOADING,
@@ -6,42 +5,23 @@ import {
   ADD_RESTAURANT,
 } from '../../constants';
 
-const records = (state = [], { type, payload }) => {
+const initialState = {
+  records: [],
+  loading: false,
+  error: false,
+};
+
+export default (state = initialState, { type, payload }) => {
   switch (type) {
     case STORE_RESTAURANTS:
-      return payload;
+      return { ...state, records: payload, loading: false };
     case ADD_RESTAURANT:
-      return [...state, payload];
-    default:
-      return state;
-  }
-};
-
-const loading = (state = false, { type, payload }) => {
-  switch (type) {
-    case STORE_RESTAURANTS:
+      return { ...state, records: [...state.records, payload] };
     case SET_ERROR:
-      return false;
+      return { ...state, loading: false, error: payload };
     case SET_LOADING:
-      return payload;
+      return { ...state, error: false, loading: payload };
     default:
       return state;
   }
 };
-
-const error = (state = false, { type, payload }) => {
-  switch (type) {
-    case SET_ERROR:
-      return payload;
-    case SET_LOADING:
-      return false;
-    default:
-      return state;
-  }
-};
-
-export default combineReducers({
-  records,
-  loading,
-  error,
-});
