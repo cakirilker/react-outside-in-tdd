@@ -1,18 +1,20 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { createMuiTheme } from '@material-ui/core/styles';
-import green from '@material-ui/core/colors/green';
+import { blue } from '@material-ui/core/colors';
 import { ThemeProvider } from '@material-ui/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
+import {
+  createMuiTheme,
+  CssBaseline,
+  AppBar,
+  Toolbar,
+  Typography,
+  Container,
+} from '@material-ui/core';
 import store from './store';
 import { Restaurants } from './containers';
 
 const theme = createMuiTheme({
-  palette: { primary: green },
+  palette: { primary: blue },
 });
 
 const App = () => (

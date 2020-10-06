@@ -6,14 +6,14 @@ describe('Creating a Restaurant', () => {
     cy.route({
       method: 'GET',
       url:
-        'https://api.outsidein.dev/u9RK4IcVq1ul4KuSwY9jVoIia70n1Z3D/restaurants',
+        'https://outside-in-dev-api.herokuapp.com/Asa1yPGao9bjYoRk0qeTzaQ91tCb6Y8H/restaurants',
       response: [],
     });
 
     cy.route({
       method: 'POST',
       url:
-        'https://api.outsidein.dev/u9RK4IcVq1ul4KuSwY9jVoIia70n1Z3D/restaurants',
+        'https://outside-in-dev-api.herokuapp.com/Asa1yPGao9bjYoRk0qeTzaQ91tCb6Y8H/restaurants',
       response: {
         id: restaurantId,
         name: restaurantName,
@@ -22,8 +22,8 @@ describe('Creating a Restaurant', () => {
 
     cy.visit('/');
 
-    cy.get('[placeholder="Add Restaurant').type(restaurantName);
-    cy.contains('Add').click();
+    cy.get('[placeholder="Restaurant Name"').type(restaurantName);
+    cy.get('[data-testid="new-restaurant-submit-button"]').click();
 
     cy.wait('@addRestaurant').its('requestBody').should('deep.equal', {
       name: restaurantName,

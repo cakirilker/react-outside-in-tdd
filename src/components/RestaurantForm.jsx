@@ -21,10 +21,12 @@ export const RestaurantForm = ({ createRestaurant }) => {
     <form onSubmit={handleSubmit}>
       {validationError && <Alert severity="error">Name is required</Alert>}
       <TextField
-        placeholder="Add Restaurant"
+        placeholder="Restaurant Name"
         fullWidth
-        variant="filled"
+        margin="normal"
+        variant="outlined"
         value={name}
+        label="Restaurant Name"
         onChange={e => setName(e.target.value)}
       />
       <Button
@@ -32,6 +34,7 @@ export const RestaurantForm = ({ createRestaurant }) => {
         color="primary"
         data-testid="new-restaurant-submit-button"
         type="submit"
+        fullWidth
       >
         Add
       </Button>

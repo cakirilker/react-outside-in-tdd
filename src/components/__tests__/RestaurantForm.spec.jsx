@@ -26,7 +26,7 @@ describe('RestaurantForm', () => {
       createRestaurant.mockResolvedValue();
       const { getByTestId, getByPlaceholderText } = context;
       await userEvent.type(
-        getByPlaceholderText('Add Restaurant'),
+        getByPlaceholderText('Restaurant Name'),
         restaurantName,
       );
       userEvent.click(getByTestId('new-restaurant-submit-button'));
@@ -39,7 +39,7 @@ describe('RestaurantForm', () => {
 
     it('should clear the name', () => {
       const { getByPlaceholderText } = context;
-      expect(getByPlaceholderText('Add Restaurant').value).toEqual('');
+      expect(getByPlaceholderText('Restaurant Name').value).toEqual('');
     });
 
     it('should hide validation error', () => {
@@ -52,7 +52,7 @@ describe('RestaurantForm', () => {
     beforeEach(async () => {
       createRestaurant.mockResolvedValue();
       const { getByPlaceholderText, getByTestId } = context;
-      await userEvent.type(getByPlaceholderText('Add Restaurant'), '');
+      await userEvent.type(getByPlaceholderText('Restaurant Name'), '');
       userEvent.click(getByTestId('new-restaurant-submit-button'));
       return act(flushPromises);
     });
@@ -72,11 +72,11 @@ describe('RestaurantForm', () => {
       createRestaurant.mockResolvedValue();
       const { getByPlaceholderText, getByTestId } = context;
 
-      await userEvent.type(getByPlaceholderText('Add Restaurant'), '');
+      await userEvent.type(getByPlaceholderText('Restaurant Name'), '');
       userEvent.click(getByTestId('new-restaurant-submit-button'));
 
       await userEvent.type(
-        getByPlaceholderText('Add Restaurant'),
+        getByPlaceholderText('Restaurant Name'),
         restaurantName,
       );
       userEvent.click(getByTestId('new-restaurant-submit-button'));
